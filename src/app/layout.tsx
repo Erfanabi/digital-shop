@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +26,33 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="px-20">{children}</div>
+        <main className="flex min-h-screen flex-col justify-between">
+          <header className="fixed z-40 flex h-20 w-full items-center justify-between bg-white px-20 shadow-xl">
+            <div className="flex items-center gap-3">
+              {/*<MonitorSmartphone />*/}
+
+              <Link href="/" className="text-2xl font-bold">
+                Digital Shop
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {/*<Auth />*/}
+              {/*<CartDropdown />*/}
+            </div>
+          </header>
+
+          <div className="mt-24 px-20">
+            {children}
+            {/*<Toaster />*/}
+          </div>
+
+          <div className="mx-auto my-10 flex justify-center">{/* {ads} */}</div>
+
+          <footer className="flex h-10 w-full items-center justify-center bg-black text-white">
+            <p>&copy; 2025 JS with Ali. All rights reserved.</p>
+          </footer>
+        </main>
       </body>
     </html>
   );
