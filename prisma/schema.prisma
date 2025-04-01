@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// generate schema
+
+enum ProductCategory {
+  MOBILE
+  LAPTOP
+  WATCH
+  OTHERS
+}
+
+// create model
+model Product {
+  id          Int             @id @default(autoincrement())
+  name        String
+  category    ProductCategory
+  description String?
+  price       Float?          @default(0.0)
+  quantity    Int?            @default(0)
+  // image
+}
+
+// 1 - generate
+// 2 - migrate
