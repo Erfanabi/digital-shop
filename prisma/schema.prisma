@@ -15,22 +15,27 @@ datasource db {
 
 // generate schema
 
-enum ProductCategory {
-  MOBILE
-  LAPTOP
-  WATCH
-  OTHERS
+model Product {
+  id       Int             @id @default(autoincrement()) // شناسه محصول
+  name     String // نام محصول
+  category ProductCategory // دسته‌بندی محصول (enum)
+  price    Float // قیمت محصول
+  quantity Int // تعداد موجود
+  images   Image[] // ارتباط با تصاویر محصول (یک محصول می‌تواند چند تصویر داشته باشد)
 }
 
-// create model
-model Product {
-  id          Int             @id @default(autoincrement())
-  name        String
-  category    ProductCategory
-  description String?
-  price       Float?          @default(0.0)
-  quantity    Int?            @default(0)
-  // image
+model Image {
+  id        Int     @id @default(autoincrement()) // شناسه تصویر
+  image     String // آدرس تصویر
+  productId Int // شناسه محصول مرتبط
+  product   Product @relation(fields: [productId], references: [id]) // ارتباط با محصول
+}
+
+enum ProductCategory {
+  MOBILE
+  WATCH
+  LAPTOP
+  OTHERS
 }
 
 // 1 - generate
