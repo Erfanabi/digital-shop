@@ -1,8 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-// import { Product, ProductCategory } from "@prisma/client";
-// import { revalidatePath } from "next/cache";
+import { Product, ProductCategory } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 // import { redirect } from "next/navigation";
 
 export const getProducts = async () => {
@@ -21,8 +21,9 @@ export const getProductsAPI = async () => {
 
 export const getProductById = async (id: string) => {
   const idNumber = parseInt(id); // تبدیل id به عدد صحیح (اگر `id` از نوع string است)
+
   if (isNaN(idNumber)) {
-    throw new Error("Invalid ID format");
+    return null; // به جای throw
   }
 
   // throw new Error('some errors from server please try again');
@@ -38,26 +39,28 @@ export const getProductById = async (id: string) => {
   return result;
 };
 
-// export const upsertProduct = async (product: Product) => {
-//   const { id } = product;
-//   let result;
-//   if (id) {
-//     result = await prisma.product.update({
-//       where: {
-//         id,
-//       },
-//       data: product,
-//     });
-//   } else {
-//     result = await prisma.product.create({
-//       data: product,
-//     });
-//   }
-//
-//   revalidatePath('/dashboard/products');
-//
-//   return result;
-// };
+export const upsertProduct = async (product: Product) => {
+  const { id } = product;
+
+  let result;
+
+  if (id) {
+    result = await prisma.product.update({
+      where: {
+        id,
+      },
+      data: product,
+    });
+  } else {
+    result = await prisma.product.create({
+      data: product,
+    });
+  }
+
+  revalidatePath("/dashboard/products");
+
+  return result;
+};
 
 // export const deleteProduct = async (id: string) => {
 //   await prisma.product.delete({ where: { id } });
