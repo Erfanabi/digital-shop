@@ -1,11 +1,12 @@
 import ProductDetail from "@/modules/products/components/ProductDetail";
-import { DATA } from "@/modules/products/mock/products";
+import { getProductById } from "@/modules/products/services";
+import { ProductsWithImages } from "@/types";
 
 async function DynamicProductsPage({ params }: { params?: any }) {
   const { id } = await params;
-  console.log(id);
 
-  const product = DATA[id - 1];
+  const product = await getProductById(id) as ProductsWithImages;
+
   console.log({ product });
 
   return (

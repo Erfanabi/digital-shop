@@ -16,12 +16,13 @@ datasource db {
 // generate schema
 
 model Product {
-  id       Int             @id @default(autoincrement()) // شناسه محصول
-  name     String // نام محصول
-  category ProductCategory // دسته‌بندی محصول (enum)
-  price    Float // قیمت محصول
-  quantity Int // تعداد موجود
-  images   Image[] // ارتباط با تصاویر محصول (یک محصول می‌تواند چند تصویر داشته باشد)
+  id          Int             @id @default(autoincrement()) // شناسه محصول
+  name        String // نام محصول
+  category    ProductCategory // دسته‌بندی محصول (enum)
+  price       Float // قیمت محصول
+  description String?
+  quantity    Int // تعداد موجود
+  images      Image[] // ارتباط با تصاویر محصول (یک محصول می‌تواند چند تصویر داشته باشد)
 }
 
 model Image {

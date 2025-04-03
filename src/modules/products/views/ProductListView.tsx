@@ -1,30 +1,10 @@
 import ProductList from "@/modules/products/components/ProductList";
-import { DATA } from "@/modules/products/mock/products";
-import { prisma, PrismaType } from "@/lib/prisma";
+import { getProducts } from "@/modules/products/services";
 
 async function ProductListView() {
+  const products = await getProducts();
 
-  const data: PrismaType.Product[] = await prisma.product.findMany();
-  console.log(data);
-
-  // const [products, setProducts] = useState<any[]>([]);
-  //
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     const result = await prisma.product.findMany({
-  //       include: { images: true },
-  //     });
-  //     setProducts(result);
-  //   };
-  //
-  //   fetchProducts();
-  // }, []);
-
-  return (
-    <div>
-      <ProductList products={DATA} />
-    </div>
-  );
+  return <ProductList products={products} />;
 }
 
 export default ProductListView;
