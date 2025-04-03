@@ -9,21 +9,18 @@ export const getProducts = async () => {
   return await prisma.product.findMany({ include: { images: true } });
 };
 
-// export const getProductsAPI = async () => {
-//   // const result = await fetch('/api/product');
-//   const result = await fetch('http://localhost:3000/api/product', {
-//     next: { revalidate: 30 },
-//   });
-//   const response = await result.json();
-//   return response;
-// };
+export const getProductsAPI = async () => {
+  // const result = await fetch('/api/product');
+  const result = await fetch("http://localhost:3000/api/product", {
+    method: "GET",
+    next: { revalidate: 30 },
+  });
+  const response = await result.json();
+  return response;
+};
 
 export const getProductById = async (id: string) => {
-  console.log("product", id);
-
-  // تبدیل id به عدد صحیح (اگر `id` از نوع string است)
-  const idNumber = parseInt(id);
-
+  const idNumber = parseInt(id); // تبدیل id به عدد صحیح (اگر `id` از نوع string است)
   if (isNaN(idNumber)) {
     throw new Error("Invalid ID format");
   }
@@ -38,7 +35,6 @@ export const getProductById = async (id: string) => {
   if (!result) {
     return null;
   }
-
   return result;
 };
 

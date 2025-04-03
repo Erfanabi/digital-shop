@@ -11,7 +11,7 @@ function productList(props: { products: ProductsWithImages[] }) {
 
   return (
     <div className="my-10 flex w-full flex-wrap items-center justify-between">
-      {products.map((item: any) => {
+      {products?.map((item: any) => {
         return <ProductItem key={item.name} product={item} />;
       })}
     </div>
