@@ -5,10 +5,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import { ProductsWithImages } from "@/types";
 // import { ProductsWithImages } from '@/types';
 // import { useCart } from '@/hooks/useCart';
 
-export default function ProductDetail(product: any) {
+export default function ProductDetail(product: ProductsWithImages) {
   // const { addToCartMutation } = useCart();
 
   return (
@@ -45,7 +46,7 @@ export default function ProductDetail(product: any) {
               <p className="text-gray-700">quantity: {product?.quantity}</p>
               <p className="mt-2 text-sm">Category: {product?.category}</p>
               <p className="line-clamp text-gray-600">
-                {product?.description || "No description available."}
+                {/*{product?.description || "No description available."}*/}
               </p>
 
               <Button

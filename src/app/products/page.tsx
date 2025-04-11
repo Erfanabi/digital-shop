@@ -1,11 +1,7 @@
 import ProductListView from "@/modules/products/views/ProductListView";
 
 function ProductPage() {
-  return (
-    <div>
-      <ProductListView />
-    </div>
-  );
+  return <ProductListView />;
 }
 
 export default ProductPage;
