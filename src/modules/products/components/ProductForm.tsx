@@ -22,12 +22,12 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 // import { upsertProduct } from "../services";
 // import UploadImage from "./UploadImage";
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+// import {
+//   useParams,
+//   usePathname,
+//   useRouter,
+//   useSearchParams,
+// } from "next/navigation";
 import { upsertProduct } from "@/modules/products/services";
 
 const ProductForm = (props: { product: Product | null }) => {
@@ -48,7 +48,7 @@ const ProductForm = (props: { product: Product | null }) => {
   const onSubmitForm = async (data: Product) => {
     const _product = {
       ...data,
-      id: product?.id,
+      id: product!.id,
       price: parseFloat(data?.price?.toString() || "0"),
       quantity: parseFloat(data?.quantity?.toString() || "0"),
     };

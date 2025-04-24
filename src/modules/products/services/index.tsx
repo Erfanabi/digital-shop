@@ -62,7 +62,7 @@ export const upsertProduct = async (product: Product) => {
   return result;
 };
 
-export const deleteProduct = async (id: string) => {
+export const deleteProduct = async (id: number) => {
   await prisma.product.delete({ where: { id } });
   redirect("/dashboard/products");
 };

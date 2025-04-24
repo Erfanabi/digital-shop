@@ -20,7 +20,7 @@ const ProductTable = (props: {
 }) => {
   const { products } = props;
 
-  const onDeleteProduct = async (id: string) => {
+  const onDeleteProduct = async (id: number) => {
     await deleteProduct(id);
   };
 
@@ -98,3 +98,36 @@ const ProductTable = (props: {
   );
 };
 export default ProductTable;
+
+// type ProductTableProps = {
+//   products: Awaited<ReturnType<typeof getProducts>>;
+// };
+//
+// const ProductTable: React.FC<ProductTableProps> = ({ products }) => {
+//   return (
+//     <div>
+//       {products.map(product => (
+//         <div key={product.id}>
+//           {/* نمایش جزئیات هر محصول */}
+//           <h3>{product.name}</h3>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// function ProductTable(props: { products: Awaited<ReturnType<typeof getProducts>> }) {
+//   const { products } = props;  // استخراج products از props
+//
+//   return (
+//       <div>
+//         {products.map(product => (
+//             <div key={product.id}>
+//               {/* نمایش جزئیات محصول */}
+//               <h3>{product.name}</h3>
+//               <p>Price: ${product.price}</p>
+//             </div>
+//         ))}
+//       </div>
+//   );
+// }

@@ -5,9 +5,7 @@ import { ProductsWithImages } from "@/types";
 async function DynamicProductsPage({ params }: { params?: any }) {
   const { id } = await params;
 
-  const product = await getProductById(id) as ProductsWithImages;
-
-  console.log({ product });
+  const product = (await getProductById(id)) as ProductsWithImages;
 
   return (
     <div>
