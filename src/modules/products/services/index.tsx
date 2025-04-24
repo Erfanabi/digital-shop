@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { Product, ProductCategory } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-// import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export const getProducts = async () => {
   return await prisma.product.findMany({ include: { images: true } });
@@ -62,7 +62,7 @@ export const upsertProduct = async (product: Product) => {
   return result;
 };
 
-// export const deleteProduct = async (id: string) => {
-//   await prisma.product.delete({ where: { id } });
-//   redirect('/dashboard/products');
-// };
+export const deleteProduct = async (id: string) => {
+  await prisma.product.delete({ where: { id } });
+  redirect("/dashboard/products");
+};

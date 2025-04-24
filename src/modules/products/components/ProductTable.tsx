@@ -13,22 +13,22 @@ import {
 import { Edit, PlusCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { getProducts } from "../services";
+import { deleteProduct, getProducts } from "../services";
 
 const ProductTable = (props: {
   products: Awaited<ReturnType<typeof getProducts>>;
 }) => {
   const { products } = props;
 
-  // const onDeleteProduct = (id: string) => {
-  //delete
-  // deleteProduct(id);
-  // };
+  const onDeleteProduct = async (id: string) => {
+    await deleteProduct(id);
+  };
 
   return (
     <div className="mt-4 rounded-lg border border-gray-200 shadow-md">
       <div className="flex items-center justify-between bg-gray-100 p-4">
         <h1 className="text-xl font-semibold">Products</h1>
+
         <Button asChild>
           <Link href="/dashboard/products/new">
             Add New Product
@@ -36,6 +36,7 @@ const ProductTable = (props: {
           </Link>
         </Button>
       </div>
+
       <Table>
         <TableHeader>
           <TableRow>
@@ -47,6 +48,7 @@ const ProductTable = (props: {
             <TableHead className="text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
+
         <TableBody>
           {products.map((product: any) => (
             <TableRow key={product.id}>
@@ -63,6 +65,7 @@ const ProductTable = (props: {
                   className="m-auto rounded-full"
                 />
               </TableCell>
+
               <TableCell className="text-center">
                 <div className="flex items-center justify-center gap-2">
                   <Button variant="ghost" asChild>
@@ -72,9 +75,9 @@ const ProductTable = (props: {
                   </Button>
                   <Button
                     variant="ghost"
-                    // onClick={() => {
-                    //   onDeleteProduct(product.id);
-                    // }}
+                    onClick={() => {
+                      onDeleteProduct(product.id);
+                    }}
                   >
                     <Trash2 />
                   </Button>
@@ -83,6 +86,7 @@ const ProductTable = (props: {
             </TableRow>
           ))}
         </TableBody>
+
         <TableFooter>
           <TableRow>
             <TableCell colSpan={5}>Total</TableCell>

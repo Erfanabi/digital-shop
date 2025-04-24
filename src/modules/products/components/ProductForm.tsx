@@ -28,6 +28,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
+import { upsertProduct } from "@/modules/products/services";
 
 const ProductForm = (props: { product: Product | null }) => {
   const { product } = props;
@@ -44,7 +45,7 @@ const ProductForm = (props: { product: Product | null }) => {
   // // console.log(router);
   const { register, handleSubmit, setValue } = useForm<Product>();
 
-  const onSubmitForm = (data: Product) => {
+  const onSubmitForm = async (data: Product) => {
     const _product = {
       ...data,
       id: product?.id,
@@ -54,6 +55,7 @@ const ProductForm = (props: { product: Product | null }) => {
 
     console.log(_product);
 
+    await upsertProduct(_product);
     // upsertProduct(_product as Product);
   };
 
@@ -65,6 +67,7 @@ const ProductForm = (props: { product: Product | null }) => {
 
           <CardDescription>Create New Product</CardDescription>
         </CardHeader>
+
         <CardContent>
           <div className="my-2">
             <Label htmlFor="name">Product Name</Label>
@@ -75,6 +78,7 @@ const ProductForm = (props: { product: Product | null }) => {
               defaultValue={product?.name || ""}
             />
           </div>
+
           <div className="my-2">
             <Label htmlFor="category">Category</Label>
             <Select
@@ -87,6 +91,7 @@ const ProductForm = (props: { product: Product | null }) => {
               <SelectTrigger>
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
+
               <SelectContent>
                 {Object.values(ProductCategory).map(cat => (
                   <SelectItem key={cat} value={cat}>
@@ -96,6 +101,7 @@ const ProductForm = (props: { product: Product | null }) => {
               </SelectContent>
             </Select>
           </div>
+
           <div className="my-2">
             <Label htmlFor="description">Description</Label>
             <Textarea
@@ -104,6 +110,7 @@ const ProductForm = (props: { product: Product | null }) => {
               defaultValue={product?.description || ""}
             />
           </div>
+
           <div className="my-2">
             <Label htmlFor="price">Price</Label>
             <Input
@@ -114,6 +121,7 @@ const ProductForm = (props: { product: Product | null }) => {
               defaultValue={product?.price || ""}
             />
           </div>
+
           <div className="my-2">
             <Label htmlFor="quantity">Quantity</Label>
             <Input
@@ -124,15 +132,18 @@ const ProductForm = (props: { product: Product | null }) => {
             />
           </div>
         </CardContent>
+
         <CardFooter className="flex justify-between">
           <Button variant="outline" asChild>
             <Link href="/dashboard/products">Back</Link>
           </Button>
+
           <Button type="submit">
             {product?.id ? "Update Product" : "Add Product"}
           </Button>
         </CardFooter>
       </form>
+
       {product?.id && (
         <CardFooter>{/*<UploadImage productId={product?.id} />*/}</CardFooter>
       )}
