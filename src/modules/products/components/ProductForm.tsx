@@ -21,7 +21,6 @@ import {
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 // import { upsertProduct } from "../services";
-// import UploadImage from "./UploadImage";
 // import {
 //   useParams,
 //   usePathname,
@@ -29,6 +28,7 @@ import { useForm } from "react-hook-form";
 //   useSearchParams,
 // } from "next/navigation";
 import { upsertProduct } from "@/modules/products/services";
+import UploadImage from "@/modules/products/components/UploadImage";
 
 const ProductForm = (props: { product: Product | null }) => {
   const { product } = props;
@@ -145,7 +145,9 @@ const ProductForm = (props: { product: Product | null }) => {
       </form>
 
       {product?.id && (
-        <CardFooter>{/*<UploadImage productId={product?.id} />*/}</CardFooter>
+        <CardFooter>
+          <UploadImage productId={product?.id} />
+        </CardFooter>
       )}
     </Card>
   );
